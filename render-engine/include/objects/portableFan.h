@@ -7,3 +7,5 @@
 void drawPortableFan(vec3 position, vec3 rotation, vec3 scale, bool enableInput = false);
 
 void portableFanKeyboard(unsigned char key, int mouseX, int mouseY);
+
+void portableFan_onLoop();
