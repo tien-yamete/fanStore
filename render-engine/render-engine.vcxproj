@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="include\objects\ceilingFan.h" />
+    <ClCompile Include="include\objects\circularFan.cpp" />
     <ClCompile Include="objects\ceilingFan.cpp" />
     <ClCompile Include="objects\fan\fan1.cpp" />
     <ClCompile Include="objects\fan\portableFan.cpp" />
@@ -69,6 +70,7 @@
     <ClInclude Include="include\core\stb_image.h" />
     <ClInclude Include="include\objects\chair1.h" />
     <ClInclude Include="include\objects\chair.h" />
+    <ClInclude Include="include\objects\circularFan.h" />
     <ClInclude Include="include\objects\fan1.h" />
     <ClInclude Include="include\objects\helicopter.h" />
     <ClInclude Include="include\objects\airplane1.h" />

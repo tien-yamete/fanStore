@@ -37,9 +37,6 @@ void engine::setupCamera(int window_width, int window_height, float zNear, float
 	mainCamera.window_height = window_height;
 	mainCamera.zNear = zNear;
 	mainCamera.zFar = zFar;
-
-	setCameraPos(vec4(0, 0, -1, 1));
-	setTargetPos(vec4(0, 0, 0, 1));
 }
 
 void engine::setCameraPos(const vec4& position)
