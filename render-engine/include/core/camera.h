@@ -20,10 +20,7 @@ namespace engine
 		//frustum
 		float zNear = 0.1f;
 		float zFar = 1000.0f;
-
-		//zoom
-		float zoomSpeed = 0.12f;
-
+		
 		//motion speed
 		float motionSpeed = 0.5f;
 
@@ -36,6 +33,8 @@ namespace engine
 
 	extern camera mainCamera;
 
+
+#define CAM_MOVE_SPEED 0.25f
 #define CAM_POS_4 (mainCamera.eye_position)
 #define CAM_POS_3 vec3(CAM_POS_4.x, CAM_POS_4.y, CAM_POS_4.z)
 
@@ -52,13 +51,15 @@ namespace engine
 
 	void setTargetPos(const vec4& position);
 
-	void zoomCamera(float value);
+	void moveCam(const vec4& delta);
 
-	void setZoomSpeed(float speed);
-
+	void rotateCam(float deltaX);
+	
 	void setCameraSpeed(float speed);
 
 	void cameraMotion(int mouseX, int mouseY, int& lastMouseX, int& lastMouseY);
+
+	void cameraMove(unsigned char key, int mouseX, int mouseY);
 
 	void useCameraMatrix(GLuint view_location, GLuint projection_location);
 }
