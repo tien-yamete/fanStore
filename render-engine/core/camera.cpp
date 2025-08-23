@@ -37,11 +37,16 @@ void engine::setupCamera(int window_width, int window_height, float zNear, float
 	mainCamera.window_height = window_height;
 	mainCamera.zNear = zNear;
 	mainCamera.zFar = zFar;
+
+	setCameraPos(vec4(0, 0, -1, 1));
+	setTargetPos(vec4(0, 0, 0, 1));
 }
 
 void engine::setCameraPos(const vec4& position)
 {
 	mainCamera.eye_position = position;
+	
+	mainCamera.target_position = mainCamera.eye_position + vec3(0, 0, 1);
 }
 
 void engine::setTargetPos(const vec4& position)
@@ -49,22 +54,23 @@ void engine::setTargetPos(const vec4& position)
 	mainCamera.target_position = position;
 }
 
-void engine::zoomCamera(float value)
+void engine::moveCam(const vec4& delta)
 {
-	if (value > 0) // Scroll up
-	{
-		setCameraPos(CAM_POS_4 + CAM_DIR_4 * mainCamera.zoomSpeed);
-	}
-	else if (value < 0) // Scroll down
-	{
-		setCameraPos(CAM_POS_4 - CAM_DIR_4 * mainCamera.zoomSpeed);
-	}
+	mainCamera.eye_position += delta;
+	mainCamera.target_position += delta;
 }
 
-void engine::setZoomSpeed(float speed)
+float yaw = 0;
+
+void engine::rotateCam(float deltaX)
 {
-	mainCamera.zoomSpeed = speed;
+	yaw += deltaX / 30;
+	mainCamera.target_position = vec4(
+		mainCamera.eye_position.x +  sin(yaw),
+		mainCamera.eye_position.y,
+		mainCamera.eye_position.z+  cos(yaw), 1);
 }
+
 
 void engine::setCameraSpeed(float speed)
 {
@@ -87,6 +93,7 @@ vec3 rotateAxis(const vec3& position, float angle, const vec3& axis)
 
 void engine::cameraMotion(int mouseX, int mouseY, int& lastMouseX, int& lastMouseY)
 {
+	return;
 	int deltaX = mouseX - lastMouseX;
 	int deltaY = mouseY - lastMouseY;
 
@@ -127,6 +134,43 @@ void engine::cameraMotion(int mouseX, int mouseY, int& lastMouseX, int& lastMous
 	
 	lastMouseX = mouseX;
 	lastMouseY = mouseY;
+}
+
+void engine::cameraMove(unsigned char key, int mouseX, int mouseY)
+{
+	switch (key)
+	{
+	case 'a':
+		moveCam(CAM_RIGHT * CAM_MOVE_SPEED);
+		break;
+
+	case 'd':
+		moveCam( -CAM_RIGHT * CAM_MOVE_SPEED);
+		break;
+		
+	case 's':
+		moveCam( -CAM_FORWARD * CAM_MOVE_SPEED);
+		break;
+
+	case 'w':
+		moveCam( CAM_FORWARD * CAM_MOVE_SPEED);
+		break;
+
+	case 'q':
+		moveCam(- CAM_UP * CAM_MOVE_SPEED);
+		break;
+
+	case 'e':
+		moveCam( CAM_UP * CAM_MOVE_SPEED);
+		break;
+	case 'r':
+		rotateCam(1);
+		break;
+
+	case 't':
+		rotateCam(-1);
+		break;
+	}
 }
 
 void engine::useCameraMatrix(GLuint view_location, GLuint projection_location)

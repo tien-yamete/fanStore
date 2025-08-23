@@ -22,6 +22,7 @@
     <ClCompile Include="include\objects\ceilingFan.h" />
     <ClCompile Include="objects\ceilingFan.cpp" />
     <ClCompile Include="objects\fan\fan1.cpp" />
+    <ClCompile Include="objects\fan\portableFan.cpp" />
     <ClCompile Include="objects\mouse.cpp" />
     <ClCompile Include="objects\keyboard.cpp" />
     <ClCompile Include="objects\airplanes\b52.cpp" />
@@ -90,6 +91,7 @@
     <ClInclude Include="include\core\lighting.h" />
     <ClInclude Include="include\objects\plane.h" />
     <ClInclude Include="include\objects\plane2.h" />
+    <ClInclude Include="include\objects\portableFan.h" />
     <ClInclude Include="include\objects\shelf.h" />
     <ClInclude Include="include\objects\sign.h" />
     <ClInclude Include="include\objects\sphere.h" />
