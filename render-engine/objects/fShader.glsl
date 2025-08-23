@@ -7,5 +7,5 @@ uniform vec4 mainColor;
 
 void main()
 {
-	fColor = mainColor;
-}
+    fColor = mainColor;
+}//

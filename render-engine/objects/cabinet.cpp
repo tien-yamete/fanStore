@@ -7,8 +7,8 @@ vec3 cabinetRight_position;
 
 void drawCabinet(vec3 position, vec3 rotation, vec3 scale, bool enableInput)
 {
-	color color1 = color(.8, .8, .8, 1);
-	color color2 = color(.5, .5, .5, 1);
+	color color1 = color(.2, .2, .2, 1);
+	color color2 = color(222, 184, 135, 255) / 255.0f;
 	//ap dung pos, rot, scale cho cube, tra ve global model matrix
 	position += cabinet_position;	//cong them cube input
 	mat4 globalTransformMatrix = cubeTransform(position, rotation, scale);
@@ -22,9 +22,9 @@ void drawCabinet(vec3 position, vec3 rotation, vec3 scale, bool enableInput)
 	drawCube(vec3(.56, -.2, .01), vec3(), vec3(.05, .4, .42), color1);
 	drawCube(vec3(-.56, -.2, .01), vec3(), vec3(.05, .4, .42), color1);
 
-	drawCube(vec3(0, .5, 0), vec3(), vec3(1.1, .05, .4), color2);
-	drawCube(vec3(0, 1, 0), vec3(), vec3(1.1, .05, .4), color2);
-	drawCube(vec3(0, 1.5, 0), vec3(), vec3(1.1, .05, .4), color2);
+	//drawCube(vec3(0, .5, 0), vec3(), vec3(1.1, .05, .4), color2);
+	//drawCube(vec3(0, 1, 0), vec3(), vec3(1.1, .05, .4), color2);
+	//drawCube(vec3(0, 1.5, 0), vec3(), vec3(1.1, .05, .4), color2);
 	drawCube(vec3(0, .8, -.21), vec3(), vec3(1.16, 1.6, .05), color1);
 	drawCube(vec3(0, .75, 0), vec3(), vec3(.05, 1.5, .45), color1);
 	drawCube(vec3(-.56, .8, .01), vec3(), vec3(.04, 1.6, .42), color1);

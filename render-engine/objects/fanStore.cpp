@@ -1,6 +1,6 @@
 #include "objects/fanStore.h"
 
-void drawPlaneStore(vec3 position, vec3 rotation, vec3 scale)
+void drawFanStore(vec3 position, vec3 rotation, vec3 scale)
 {
     mat4 globalTransformMatrix = cubeTransform(position, rotation, scale);
     cylinderTransform(position, rotation, scale);

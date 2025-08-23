@@ -8,4 +8,4 @@
 #include "plane2.h"
 #include "sphere.h"
 
-void drawPlaneStore(vec3 position, vec3 rotation, vec3 scale);
+void drawFanStore(vec3 position, vec3 rotation, vec3 scale);

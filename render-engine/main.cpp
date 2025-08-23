@@ -41,6 +41,8 @@
 #include "objects/fan1.h"
 #include "objects/ceilingFan.h"
 
+#include "objects/portableFan.h"
+
 using namespace engine;
 using namespace std;
 
@@ -174,8 +176,7 @@ void setUpCam()
 		cameraMotion(-1, 1, lastMouseX, lastMouseY);
 	}
 
-	for (int i = 0; i < 45; i++)
-		zoomCamera(-1);
+	setCameraPos(vec3(0, 2, -3));
 }
 
 void initialize_before_display()
@@ -200,15 +201,20 @@ void display()
 
 	if (enableAxes) drawAxes();
 
-	drawCeilingFan(vec3(0, 47, 0), vec3(0, 0, 0), vec3(3, 3, 3), true);
+	drawCeilingFan(vec3(0, 48, 0), vec3(0, 0, 0), vec3(3, 3, 3), true);
 
-	drawLamp(vec3(-32, 35, 20), vec3(), vec3(5, 5, 5), lamp_light_1);
+	drawFanStore(vec3(0, 0, 0), vec3(0, 0, 0), vec3(1.5, 1.2, 1.5));
 
-	drawLamp(vec3(32, 35, 20), vec3(), vec3(5, 5, 5), lamp_light_2);
+	drawCabinet(vec3(-41, 11, -17), vec3(0, 90, 0), vec3(25, 20, 30));	
+
+
+	/*drawLamp(vec3(-32, 35, 20), vec3(), vec3(5, 5, 5), lamp_light_1);
+
+	drawLamp(vec3(32, 35, 20), vec3(), vec3(5, 5, 5), lamp_light_2);*/
 
 	//drawLamp(vec3(0, 35, 0), vec3(), vec3(5, 5, 5), lamp_light_3);
 
-	drawPlaneStore(vec3(0, 0, 0), vec3(), vec3(1.5, 1.2, 1.5));
+	//drawPlaneStore(vec3(0, 0, 0), vec3(), vec3(1.5, 1.2, 1.5));
 
 	//drawFan1(vec3(-20, 30, 0), vec3(0, 0, 0), vec3(5, 5, 5), true);
 
@@ -228,7 +234,7 @@ void display()
 
 	//drawMouse(vec3(-34.5, 13.8, 27), vec3(0, -90, 0), vec3(5, 5, 5));
 
-	//drawCabinet(vec3(-41, 11, -17), vec3(0, 90, 0), vec3(25, 20, 30));	//cabinet
+	
 
 
 	//if (selectedIndex == 1)
@@ -263,6 +269,8 @@ void timer(int value)
 
 void input(unsigned char key, int mouseX, int mouseY)
 {
+	cameraMove(key, mouseX, mouseY);
+	
 	switch (key)
 	{
 	case '1':
@@ -308,7 +316,7 @@ void input(unsigned char key, int mouseX, int mouseY)
 		disableCamRot = !disableCamRot;
 
 		if (!disableCamRot)
-			engine::setTargetPos(vec4(0, 0, 0, 1));
+			engine::setTargetPos(CAM_POS_4 + CAM_FORWARD);
 	}
 	break;
 	case 27:
@@ -371,14 +379,6 @@ void mouse(int button, int state, int x, int y)
 	else if (button == GLUT_LEFT_BUTTON && state == GLUT_UP)
 	{
 		leftMouseButtonDown = false;
-	}
-	else if (button == 3) // Scroll up
-	{
-		zoomCamera(1);
-	}
-	else if (button == 4) // Scroll down
-	{
-		zoomCamera(-1);
 	}
 }
 

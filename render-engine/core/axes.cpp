@@ -129,18 +129,18 @@ void engine::drawAxes()
 {
 	glUseProgram(axes_program);
 	glBindVertexArray(axes_VAO);
-
-
+	
+	
 	GLuint mloc = glGetUniformLocation(axes_program, "model");
 	GLuint vloc = glGetUniformLocation(axes_program, "view");
 	GLuint ploc = glGetUniformLocation(axes_program, "projection");
-
+	
 	useCameraMatrix(vloc, ploc);
-
+	
 	glUniformMatrix4fv(mloc, 1, GL_TRUE, Scale(1000));
-
+	
 	glDrawElements(GL_LINES, 6, GL_UNSIGNED_INT, 0);
-
+	
 	glBindVertexArray(0);
 	glUseProgram(0);
 }
