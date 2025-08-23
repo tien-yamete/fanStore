@@ -200,17 +200,17 @@ void display()
 
 	if (enableAxes) drawAxes();
 
-	drawCeilingFan(vec3(0, 0, 0), vec3(0, 0, 0), vec3(5, 5, 5), true);
+	drawCeilingFan(vec3(0, 47, 0), vec3(0, 0, 0), vec3(3, 3, 3), true);
 
-	/*drawLamp(vec3(-32, 35, 20), vec3(), vec3(5, 5, 5), lamp_light_1);
+	drawLamp(vec3(-32, 35, 20), vec3(), vec3(5, 5, 5), lamp_light_1);
 
 	drawLamp(vec3(32, 35, 20), vec3(), vec3(5, 5, 5), lamp_light_2);
 
-	drawLamp(vec3(0, 35, 0), vec3(), vec3(5, 5, 5), lamp_light_3);
+	//drawLamp(vec3(0, 35, 0), vec3(), vec3(5, 5, 5), lamp_light_3);
 
 	drawPlaneStore(vec3(0, 0, 0), vec3(), vec3(1.5, 1.2, 1.5));
 
-	drawFan1(vec3(-20, 30, 0), vec3(0, 0, 0), vec3(5, 5, 5), true);*/
+	//drawFan1(vec3(-20, 30, 0), vec3(0, 0, 0), vec3(5, 5, 5), true);
 
 	//drawTable(vec3(-32, 13, 20), vec3(0, -90, 0), vec3(25, 20, 20));
 
@@ -266,7 +266,7 @@ void input(unsigned char key, int mouseX, int mouseY)
 	switch (key)
 	{
 	case '1':
-		selectedInfo = ">> airplane";
+		selectedInfo = ">> ceiling fan";
 		selectedIndex = 1;
 		selectedInputInfo = "q, e: rotate";
 		break;
@@ -319,7 +319,7 @@ void input(unsigned char key, int mouseX, int mouseY)
 	switch (selectedIndex)
 	{
 	case 1:
-		airplane1Keyboard(key, mouseX, mouseY);
+		ceilingFanKeyboard(key, mouseX, mouseY);
 		break;
 	case 2:
 		biplaneKeyboard(key, mouseX, mouseY);

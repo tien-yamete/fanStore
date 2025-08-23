@@ -2,32 +2,47 @@
 
 vec3 ceilingFan_rotate;
 
+static bool cf_on = false;
+static float cf_angle = 0.0f;
+
 void drawCeilingFan(vec3 position, vec3 rotation, vec3 scale, bool enableInput)
 {
-	color bodyColor = WHITE;
-	if (enableInput)
-		rotation += ceilingFan_rotate;
-	mat4 globalTransformMatrix = cylinderTransform(position, rotation, scale);
-	plane2Transform(position, rotation, scale);
+    if (enableInput)
+        rotation += ceilingFan_rotate;
 
-	drawCylinder(vec3(0, 0, 0), vec3(0, 0, 0), vec3(2, .7, 2), color(0.33, 0.27, 0.93, 1));
-	drawCylinder(vec3(0,-.8, 0), vec3(0, 0, 0), vec3(.6, 1, .6), color(0.33, 0.27, 0.93, 1));
+    if (cf_on) {
+        cf_angle += 1.0f;
+        if (cf_angle >= 360.0f) cf_angle -= 360.0f;
+    }
 
-	drawSphere(vec3(0, -8, 0), vec3(0, 0, 0), vec3(7, 4, 7), color(0.33, 0.27, 0.93, 1));
+    mat4 globalTransformMatrix = cylinderTransform(position, rotation, scale);
+    plane2Transform(position, rotation, scale);
 
+    drawCylinder(vec3(0, 0, 0), vec3(0, 0, 0), vec3(2, .7, 2), color(1, 1, 1, 1));
+
+    mat4 currentModelMatrix = cubeTransformMatrix(globalTransformMatrix * (enableInput ? Angel::RotateY(ceilingFan_rotate.y) : identity()));
+
+    drawCylinder(vec3(0, -.8, 0), vec3(0, 0, 0), vec3(.6, 1, .6), color(1, 1, 1, 1));
+    drawCylinder(vec3(0, -1.5, 0), vec3(0, 0, 0), vec3(2, 1, 2), color(1, 1, 1, 1));
+
+    plane2TransformMatrix(globalTransformMatrix * Angel::RotateY(cf_angle));
+    drawPlane2(vec3(0, -1.5, 4), vec3(0, 0, 0), vec3(2, .3, 8), color(1, 1, 1, 1));
+    drawPlane2(vec3(-4, -1.5, -2.3), vec3(0, -120, 0), vec3(2, .3, 8), color(1, 1, 1, 1));
+    drawPlane2(vec3(4, -1.5, -2.3), vec3(0, 120, 0), vec3(2, .3, 8), color(1, 1, 1, 1));
+    plane2TransformMatrix(globalTransformMatrix);
 }
 
 void ceilingFanKeyboard(unsigned char key, int mouseX, int mouseY)
 {
-	switch (key)
-	{
-	case 'q':
-		ceilingFan_rotate.y += 5;
-		break;
-	case 'e':
-		ceilingFan_rotate.y -= 5;
-		break;
-	default:
-		break;
-	}
+    switch (key)
+    {
+    case 'q':
+        cf_on = true;
+        break;
+    case 'e':
+        cf_on = false;
+        break;
+    default:
+        break;
+    }
 }
