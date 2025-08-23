@@ -42,6 +42,7 @@
 #include "objects/ceilingFan.h"
 
 #include "objects/portableFan.h"
+#include "objects/circularFan.h"
 
 using namespace engine;
 using namespace std;
@@ -191,6 +192,9 @@ void initialize_before_display()
 	initCylinder();
 	initSphere();
 	initSign();
+	
+	setCameraPos(vec4(0, 0, -1, 1));
+	setTargetPos(vec4(0, 0, 0, 1));
 }
 
 void display()
@@ -270,7 +274,7 @@ void timer(int value)
 void input(unsigned char key, int mouseX, int mouseY)
 {
 	cameraMove(key, mouseX, mouseY);
-	
+	circularFanKeyboard(key, mouseX, mouseY);
 	switch (key)
 	{
 	case '1':
