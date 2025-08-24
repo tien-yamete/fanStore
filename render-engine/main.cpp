@@ -27,13 +27,13 @@
 #include "objects/fanStore.h"
 #include "objects/keyboard.h"
 #include "objects/mouse.h"
-#include "objects/robo.h"
 
 #include "objects/fan1.h"
 #include "objects/ceilingFan.h"
 
 #include "objects/portableFan.h"
 #include "objects/circularFan.h"
+#include "objects/wallFan.h"
 
 using namespace engine;
 using namespace std;
@@ -49,59 +49,13 @@ void toggleAxes()
 	enableAxes = !enableAxes;
 }
 
-//DAY TIME PROTOTYPE FUNCS
-void day();
-
-void night();
-
-void sunset();
-
-
 bool leftMouseButtonDown = false;
 int lastMouseX, lastMouseY;
 
-const char* defaultSelectedInfo = ">> None (Press to select) ";
-const char* selectedInfo = defaultSelectedInfo;
-const char* selectedInputInfo = "";
 int selectedIndex = -1;
 
 bool disableCamRot = false;
 
-void onGUI()
-{
-	glColor3f(1.0, 1.0, 1.0);
-
-	ui::text2D("Render Engine", 10, 10, ui::window_height - 20, color(1, 1, 0, 1));
-
-	ui::text2D("middle mouse - zoom in/out", 14, 10, ui::window_height - 50);
-	ui::text2D("left mouse - rotate camera", 14, 10, ui::window_height - 70);
-
-	//ui::text2D("s - move right", 10, 10, ui::window_height - 60);
-	//ui::text2D("d - move right", 10, 10, ui::window_height - 70);
-	//ui::text2D("w - move right", 10, 10, ui::window_height - 80);
-
-	btnAxes = ui::button2D("Axes", 14, 80, 40, ui::window_width - 90, ui::window_height - 50, color(1, 1, 0, 1), color(0, 0, 0, 1));
-	btnDay = ui::button2D("Day", 14, 80, 40, ui::window_width - 90, ui::window_height - 100, color(.9f, .9f, .9f, 1), color(0, 0, 0, 1));
-	btnNight = ui::button2D("Night", 14, 80, 40, ui::window_width - 90, ui::window_height - 150, color(.1f, .1f, .1f, 1), color(1, 1, 1, 1));
-	btnSunset = ui::button2D("Sunset", 14, 80, 40, ui::window_width - 90, ui::window_height - 200, color(.5f, 0, 0, 1), color(1, 1, 0, 1));
-	btnAxes.onClick = toggleAxes;
-	btnDay.onClick = day;
-	btnNight.onClick = night;
-	btnSunset.onClick = sunset;
-
-	ui::text2D(selectedInfo, 14, 10, ui::window_height - 100);
-	ui::text2D("1 - airplane", 14, 15, ui::window_height - 120);
-	ui::text2D("2 - biplane", 14, 15, ui::window_height - 140);
-	ui::text2D("3 - helicopter", 14, 15, ui::window_height - 160);
-	ui::text2D("4 - b52", 14, 15, ui::window_height - 180);
-	ui::text2D("5 - cabinet", 14, 15, ui::window_height - 200);
-	ui::text2D("6 - robo", 14, 15, ui::window_height - 220);
-	ui::text2D("7 - None", 14, 15, ui::window_height - 240);
-
-	ui::text2D("0 - Camera View", 14, 15, ui::window_height - 260);
-
-	ui::text2D(selectedInputInfo, 14, 15, 50);
-}
 
 //LIGHTING
 
@@ -157,34 +111,21 @@ void sunset()
 		sun_light->specular = color3(.8f, .2f, .0f);
 }
 
-void setUpCam()
-{
-	int mX = 0;
-	int mY = 0;
-	for (int i = 0; i < 60; i++)
-	{
-		lastMouseX = 0;
-		lastMouseY = 0;
-		cameraMotion(-1, 1, lastMouseX, lastMouseY);
-	}
-
-	setCameraPos(vec3(0, 2, -3));
-}
 
 void initialize_before_display()
 {
 	engine::initEnvironment();
 	engine::initDefaultShaders();
 	setupLights();
-	setUpCam();
 	initCube();
 	initPlane();
 	initPlane2();
 	initCylinder();
 	initSphere();
-	
-	setCameraPos(vec4(0, 0, -1, 1));
-	setTargetPos(vec4(0, 0, 0, 1));
+
+	setCameraPos(vec4(0, 15, 90, 1));
+	setTargetPos(vec4(0, 15, 89, 1));
+	rotateCam(180 * 30 * Deg2Rad);
 }
 
 void display()
@@ -194,33 +135,38 @@ void display()
 	glEnable(GL_DEPTH_TEST);
 
 	if (enableAxes) drawAxes();
-
-	drawCeilingFan(vec3(0, 48, 0), vec3(0, 0, 0), vec3(3, 3, 3), true);
-
+	
 	drawFanStore(vec3(0, 0, 0), vec3(0, 0, 0), vec3(1.5, 1.2, 1.5));
 
 	drawCabinet(vec3(-41, 11, -17), vec3(0, 90, 0), vec3(25, 20, 30));	
-
+	
 	drawLamp(vec3(32, 35, 20), vec3(), vec3(5, 5, 5), lamp_light_2);
-
+	
 	drawTable(vec3(-42, 7, 16), vec3(0, -90, 0), vec3(32, 20, 20));
-
+	
 	drawTable(vec3(33, 13, -17), vec3(0, -180, 0), vec3(25, 20, 20));
-
+	
 	drawChair1(vec3(40, 6.5, -25), vec3(0, 0, 0), vec3(8.5, 8, 8.5));
-
+	
 	drawComputer(vec3(34.5, 17, -15), vec3(0, 90, 0), vec3(10, 10, 10));
-
+	
 	drawKeyboard(vec3(34.5, 13.8, -20), vec3(0, 0, 0), vec3(5, 5, 5));
+	
+	drawMouse(vec3(27.5, 13.8f, -20), vec3(0, 0, 0), vec3(5, 5, 5));
 
-	drawMouse(vec3(27.5, 13.8, -20), vec3(0, 0, 0), vec3(5, 5, 5));
+	// ================DRAW 5 FANS=============================
+	drawCeilingFan(vec3(0, 48, 0), vec3(0, 0, 0), vec3(3, 3, 3), true);
+	
+	drawPortableFan(vec3(-24, 10.5f, -24), vec3(0, -180, 0), vec3(8), false);
+	
+	drawFan1(vec3(-1, 3.5f, -24), vec3(0, 90, 0), vec3(2.75f), true);
+	
+	drawCircularFan(vec3(22, 15.5f, -17), vec3(0, -180, 0), vec3(2));
 
-	//drawPortableFan(vec3(-37, 7, 20), vec3(0, 0, 0), vec3(5, 5, 5), false);
-
-	//drawFan1(vec3(0, 20, 0), vec3(0, 0, 0), vec3(5, 5, 5), true);
-
-	onGUI();
-
+	drawWallFan(vec3(47, 23.5f, -22), vec3(0, -90, 0), vec3(2));
+	
+	//onGUI();
+	
 	glutSwapBuffers();
 }
 
@@ -240,42 +186,29 @@ void input(unsigned char key, int mouseX, int mouseY)
 {
 	cameraMove(key, mouseX, mouseY);
 	circularFanKeyboard(key, mouseX, mouseY);
+	fan1Keyboard(key, mouseX, mouseY);
 	switch (key)
 	{
 	case '1':
-		selectedInfo = ">> ceiling fan";
-		selectedIndex = 1;
-		selectedInputInfo = "q, e: rotate";
+		
 		break;
 	case '2':
-		selectedInfo = ">> fan";
-		selectedIndex = 2;
-		selectedInputInfo = "q, e: rotate";
+		
 		break;
 	case '3':
-		selectedInfo = ">> helicopter";
-		selectedIndex = 3;
-		selectedInputInfo = "q, e: rotate - x, X (shift + x): wing rotate";
+	
 		break;
 	case '4':
-		selectedInfo = ">> b52";
-		selectedIndex = 4;
-		selectedInputInfo = "q, e: rotate";
+		
 		break;
 	case '5':
-		selectedInfo = ">> cabinet";
-		selectedIndex = 5;
-		selectedInputInfo = "t, p: close - T (shift + t), p (shift + p): open";
+	
 		break;
 	case '6':
-		selectedInfo = ">> robo";
-		selectedIndex = 6;
-		selectedInputInfo = "a d s w: move - q, e: rotate";
+		
 		break;
 	case '7':
-		selectedInfo = defaultSelectedInfo;
-		selectedIndex = -1;
-		selectedInputInfo = "";
+		
 		break;
 	case '0':
 	{
@@ -311,10 +244,8 @@ void input(unsigned char key, int mouseX, int mouseY)
 		cabinetKeyboard(key, mouseX, mouseY);
 		break;
 	case 6:
-		roboKeyboard(key, mouseX, mouseY);
 		break;
 	default:
-		selectedInputInfo = "";
 		break;
 	}
 

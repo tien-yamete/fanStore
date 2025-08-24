@@ -3,9 +3,9 @@
 vec3 fan1_rotate;
 
 // cau hinh de chinh
-static const float CF_SPEED_DEG = 6.0f;   // toc do quay canh do moi frame khi bat
-static const float CD_SPEED_DEG = 1.2f;   // toc do lac dau do moi frame
-static const float CD_MAX_SWEEP = 60.0f;  // bien do lac dau ± do tang giam de quet rong hep
+static const float CF_SPEED_DEG = 1.9f;   // toc do quay canh do moi frame khi bat
+static const float CD_SPEED_DEG = 0.12f;   // toc do lac dau do moi frame
+static const float CD_MAX_SWEEP = 60.0f;  // bien do lac dau ï¿½ do tang giam de quet rong hep
 
 static bool cf_on = false;
 static bool cd_on = false;
@@ -41,7 +41,7 @@ void drawFan1(vec3 position, vec3 rotation, vec3 scale, bool enableInput)
     cubeTransform(position, rotation, scale);
 
     // chan tru
-    cubeTransformMatrix(globalTransformMatrix);
+    //cubeTransformMatrix(globalTransformMatrix);
     drawCylinder(vec3(0, 0, 0), vec3(0), vec3(3, .4, 3), color1);
     drawCylinder(vec3(0, 2, 0), vec3(0), vec3(.6, 4, .6), color1);
     drawCylinder(vec3(0, 4, 0), vec3(0), vec3(1, .5, 1), color1);
@@ -53,9 +53,9 @@ void drawFan1(vec3 position, vec3 rotation, vec3 scale, bool enableInput)
     mat4 headBase = globalTransformMatrix;
 
     // tam quay dau quat dat o giua cum dau quat ngay khop noi khong dat o canh
-    const vec3 pivotHead = vec3(-1.2f, 9.0f, 0.0f);
+    const vec3 pivotHead = vec3(-0.0f, 6.0f, 0.0f);
     // tam quay canh ngay bau canh hub
-    const vec3 pivotBlade = vec3(-3.2f, 9.0f, 0.0f);
+    const vec3 pivotBlade = vec3(-3.2f, 6.0f, 0.0f);
 
     // yaw lac trai phai quanh pivotHead
     mat4 headYaw = Angel::Translate(pivotHead) * Angel::RotateY(cd_angle) * Angel::Translate(-pivotHead);
@@ -64,19 +64,18 @@ void drawFan1(vec3 position, vec3 rotation, vec3 scale, bool enableInput)
 
     // ve than dau quat theo headYaw
     cylinderTransformMatrix(headBase * headYaw);
-    drawCylinder(vec3(.5, 9, 0), vec3(0, 0, 90), vec3(2, 1.5, 2), color1);
-    drawCylinder(vec3(-1.2, 9, 0), vec3(0, 0, 90), vec3(2.4, 2, 2.4), color1);
-    drawCylinder(vec3(-2.2, 9, 0), vec3(0, 0, 90), vec3(1, .4, 1), wood);
-    drawCylinder(vec3(-2.7, 9, 0), vec3(0, 0, 90), vec3(.3, .5, .3), wood);
-    drawCylinder(vec3(-3.2, 9, 0), vec3(0, 0, 90), vec3(1.2, .5, 1.2), wood);
+    drawCylinder(vec3(.5f, 6.0f, 0), vec3(0, 0, 90), vec3(2, 1.5, 2), color1);
+    drawCylinder(vec3(-1.2f, 6.0f, 0), vec3(0, 0, 90), vec3(2.4, 2, 2.4), color1);
+    drawCylinder(vec3(-2.2f, 6.0f, 0), vec3(0, 0, 90), vec3(1, .4, 1), wood);
+    drawCylinder(vec3(-2.7f, 6.0f, 0), vec3(0, 0, 90), vec3(.3, .5, .3), wood);
+    drawCylinder(vec3(-3.2f, 6.0f, 0), vec3(0, 0, 90), vec3(1.2, .5, 1.2), wood);
 
     // ve canh theo headYaw * bladeSpin tuc la lac dau + quay canh
     plane2TransformMatrix(headBase * headYaw * bladeSpin);
-    drawPlane2(vec3(-3.2, 9, 2), vec3(0, 0, 90), vec3(2, .15, 4), color2);
-    drawPlane2(vec3(-3.2, 9, -2), vec3(180, 0, 90), vec3(1.5, .15, 4), color2);
-    drawPlane2(vec3(-3.2, 7, 0), vec3(90, 0, 90), vec3(1.5, .15, 4), color2);
-    drawPlane2(vec3(-3.2, 11, 0), vec3(-90, 0, 90), vec3(1.5, .15, 4), color2);
-
+    drawPlane2(vec3(-3.2f, 6.0f, 2), vec3(0, 0, 90), vec3(2, .15, 4), color2);
+    drawPlane2(vec3(-3.2f, 6.0f, -2), vec3(180, 0, 90), vec3(1.5, .15, 4), color2);
+    drawPlane2(vec3(-3.2f, 4.0f, 0), vec3(90, 0, 90), vec3(1.5, .15, 4), color2);
+    drawPlane2(vec3(-3.2f, 8.0f, 0), vec3(-90, 0, 90), vec3(1.5, .15, 4), color2);
     // reset
     plane2TransformMatrix(globalTransformMatrix);
     cubeReset();
@@ -88,10 +87,10 @@ void fan1Keyboard(unsigned char key, int mouseX, int mouseY)
 {
     switch (key)
     {
-    case 'q': cd_on = true;  break;  // bat lac dau
-    case 'e': cd_on = false; break;  // tat lac dau
-    case 'b': cf_on = true;  break;  // bat quay canh
-    case 't': cf_on = false; break;  // tat quay canh
+    case 'c': cd_on = !cd_on;
+        break; // bat lac dau
+    case 'v': cf_on = !cf_on;
+        break; // tat quay canh
     default: break;
     }
 }
