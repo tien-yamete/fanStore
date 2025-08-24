@@ -16,13 +16,6 @@
 #include <objects/cylinder.h>		
 #include <objects/sphere.h>
 
-//air planes
-#include "objects/airplane.h"
-#include "objects/helicopter.h"	
-#include "objects/airplane1.h"
-#include "objects/biplane.h"
-#include "objects/b52.h"
-
 //scene objects
 #include "objects/shelf.h"	
 #include "objects/computer.h"	
@@ -31,8 +24,6 @@
 #include "objects/lamp.h"
 #include "objects/chair.h"
 #include "objects/chair1.h"
-#include "objects/sign.h"
-#include "objects/testObject.h"
 #include "objects/fanStore.h"
 #include "objects/keyboard.h"
 #include "objects/mouse.h"
@@ -191,7 +182,6 @@ void initialize_before_display()
 	initPlane2();
 	initCylinder();
 	initSphere();
-	initSign();
 	
 	setCameraPos(vec4(0, 0, -1, 1));
 	setTargetPos(vec4(0, 0, 0, 1));
@@ -205,54 +195,29 @@ void display()
 
 	if (enableAxes) drawAxes();
 
-	drawCeilingFan(vec3(0, 48, 0), vec3(0, 0, 0), vec3(3, 3, 3), true);
+	//drawCeilingFan(vec3(0, 48, 0), vec3(0, 0, 0), vec3(3, 3, 3), true);
 
-	drawFanStore(vec3(0, 0, 0), vec3(0, 0, 0), vec3(1.5, 1.2, 1.5));
+	//drawFanStore(vec3(0, 0, 0), vec3(0, 0, 0), vec3(1.5, 1.2, 1.5));
 
-	drawCabinet(vec3(-41, 11, -17), vec3(0, 90, 0), vec3(25, 20, 30));	
+	//drawCabinet(vec3(-41, 11, -17), vec3(0, 90, 0), vec3(25, 20, 30));	
 
+	//drawLamp(vec3(32, 35, 20), vec3(), vec3(5, 5, 5), lamp_light_2);
 
-	/*drawLamp(vec3(-32, 35, 20), vec3(), vec3(5, 5, 5), lamp_light_1);
+	//drawTable(vec3(-42, 7, 16), vec3(0, -90, 0), vec3(32, 20, 20));
 
-	drawLamp(vec3(32, 35, 20), vec3(), vec3(5, 5, 5), lamp_light_2);*/
+	//drawTable(vec3(33, 13, -17), vec3(0, -180, 0), vec3(25, 20, 20));
 
-	//drawLamp(vec3(0, 35, 0), vec3(), vec3(5, 5, 5), lamp_light_3);
+	//drawChair1(vec3(40, 6.5, -25), vec3(0, 0, 0), vec3(8.5, 8, 8.5));
 
-	//drawPlaneStore(vec3(0, 0, 0), vec3(), vec3(1.5, 1.2, 1.5));
+	//drawComputer(vec3(34.5, 17, -15), vec3(0, 90, 0), vec3(10, 10, 10));
 
-	//drawFan1(vec3(-20, 30, 0), vec3(0, 0, 0), vec3(5, 5, 5), true);
+	//drawKeyboard(vec3(34.5, 13.8, -20), vec3(0, 0, 0), vec3(5, 5, 5));
 
-	//drawTable(vec3(-32, 13, 20), vec3(0, -90, 0), vec3(25, 20, 20));
+	//drawMouse(vec3(27.5, 13.8, -20), vec3(0, 0, 0), vec3(5, 5, 5));
 
-	//drawTable(vec3(30, 13, 20), vec3(0, 90, 0), vec3(25, 20, 20));
+	//drawPortableFan(vec3(-37, 7, 20), vec3(0, 0, 0), vec3(5, 5, 5), false);
 
-	//drawChair(vec3(40, 3, 21), vec3(0, -90, 0), vec3(8, 12, 8));
-
-	//drawChair1(vec3(-42, 6.5, 23), vec3(0, 90, 0), vec3(8, 8, 8));
-
-	//drawRobo(vec3(-42, 14, 23), vec3(), vec3(8, 8, 8));
-
-	//drawComputer(vec3(-30.5, 17, 20), vec3(0, 180, 0), vec3(10, 10, 10));
-
-	//drawKeyboard(vec3(-34.5, 13.8, 20), vec3(0, -90, 0), vec3(5, 5, 5));
-
-	//drawMouse(vec3(-34.5, 13.8, 27), vec3(0, -90, 0), vec3(5, 5, 5));
-
-	
-
-
-	//if (selectedIndex == 1)
-	//	drawAirplane1(vec3(30.5f, 14.5f, 21), vec3(0, 0, 0), vec3(1, 1.5f, 1.5f), true);	//selected airplane1
-
-	//if (selectedIndex == 2)
-	//	drawBiplane(vec3(30.5f, 15.0f, 21), vec3(0, 0, 0), vec3(1.0f, 1.0f, 1.0f), true);		//selected biplane
-
-	//if(selectedIndex == 3)
-	//	drawHelicopter(vec3(30.5f, 15.75f, 21), vec3(0, 90, 0), vec3(9.0f, 9.0f, 9.0f), true, true);		//selected helicopter
-
-	//if (selectedIndex == 4)
-	//	drawB52(vec3(30.5f, 14.25f, 21), vec3(0, 90, 0), vec3(1.25f, 1.25f, 1.25f), true);		//selected b52
-
+	drawFan1(vec3(0, 20, 0), vec3(0, 0, 0), vec3(5, 5, 5), true);
 
 	onGUI();
 
@@ -283,7 +248,7 @@ void input(unsigned char key, int mouseX, int mouseY)
 		selectedInputInfo = "q, e: rotate";
 		break;
 	case '2':
-		selectedInfo = ">> biplane";
+		selectedInfo = ">> fan";
 		selectedIndex = 2;
 		selectedInputInfo = "q, e: rotate";
 		break;
@@ -334,13 +299,13 @@ void input(unsigned char key, int mouseX, int mouseY)
 		ceilingFanKeyboard(key, mouseX, mouseY);
 		break;
 	case 2:
-		biplaneKeyboard(key, mouseX, mouseY);
+		fan1Keyboard(key, mouseX, mouseY);
 		break;
 	case 3:
-		helicopterKeyboard(key, mouseX, mouseY);
+		
 		break;
 	case 4:
-		b52Keyboard(key, mouseX, mouseY);
+
 		break;
 	case 5:
 		cabinetKeyboard(key, mouseX, mouseY);

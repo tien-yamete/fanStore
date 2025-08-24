@@ -6,8 +6,8 @@ void drawChair(vec3 position, vec3 rotation, vec3 scale)
 	mat4 globalTransformMatrix = cylinderTransform(position, rotation, scale);
 	cubeTransform(position, rotation, scale);
 
-	color woodColor = color(0.7, 0.5, 0.3, 1); // Màu gỗ tự nhiên
-	color cushionColor = color(0.3, 0.2, 0.2, 1); // Màu đệm ghế
+	color woodColor = color(0.9, 0.9, 0.9, 1); // Màu gỗ tự nhiên
+	color cushionColor = color(0.1, 0.1, 0.1, 1); // Màu đệm ghế
 
 	// **1. Mặt ghế cong nhẹ & có đệm dày hơn**
 	drawCylinder(vec3(0, 0.55, 0), vec3(0, 0, 0), vec3(0.6, 0.05, 0.6), woodColor); // Gỗ dày hơn

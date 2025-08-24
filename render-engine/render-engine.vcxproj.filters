@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="objects\airplanes\biplane.cpp" />
     <ClCompile Include="core\axes.cpp" />
     <ClCompile Include="core\camera.cpp" />
     <ClCompile Include="core\InitShader.cpp" />
@@ -9,9 +8,6 @@
     <ClCompile Include="core\textfile.cpp" />
     <ClCompile Include="core\lighting.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="objects\airplanes\airplane.cpp" />
-    <ClCompile Include="objects\airplanes\helicopter.cpp" />
-    <ClCompile Include="objects\airplanes\airplane1.cpp" />
     <ClCompile Include="objects\cabinet.cpp" />
     <ClCompile Include="objects\chair.cpp" />
     <ClCompile Include="objects\chair1.cpp" />
@@ -26,9 +22,6 @@
     <ClCompile Include="objects\sphere\sphere.cpp" />
     <ClCompile Include="objects\table.cpp" />
     <ClCompile Include="core\shaders.cpp" />
-    <ClCompile Include="objects\testObject.cpp" />
-    <ClCompile Include="objects\sign.cpp" />
-    <ClCompile Include="objects\airplanes\b52.cpp" />
     <ClCompile Include="objects\fanStore.cpp" />
     <ClCompile Include="objects\keyboard.cpp" />
     <ClCompile Include="objects\mouse.cpp" />
@@ -36,17 +29,15 @@
     <ClCompile Include="objects\fan\fan1.cpp" />
     <ClCompile Include="include\objects\ceilingFan.h" />
     <ClCompile Include="objects\ceilingFan.cpp" />
+    <ClCompile Include="objects\circularFan.cpp" />
+    <ClCompile Include="objects\fan\portableFan.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\objects\biplane.h" />
     <ClInclude Include="include\core\shaders.h" />
     <ClInclude Include="include\core\stb_image.h" />
     <ClInclude Include="include\objects\chair1.h" />
     <ClInclude Include="include\objects\chair.h" />
-    <ClInclude Include="include\objects\helicopter.h" />
-    <ClInclude Include="include\objects\airplane1.h" />
     <ClInclude Include="core\mat_old_from_angel.h" />
-    <ClInclude Include="include\objects\airplane.h" />
     <ClInclude Include="include\objects\cabinet.h" />
     <ClInclude Include="include\objects\computer.h" />
     <ClInclude Include="include\objects\cylinder.h" />
@@ -65,17 +56,16 @@
     <ClInclude Include="include\objects\plane.h" />
     <ClInclude Include="include\objects\plane2.h" />
     <ClInclude Include="include\objects\shelf.h" />
-    <ClInclude Include="include\objects\sign.h" />
     <ClInclude Include="include\objects\sphere.h" />
     <ClInclude Include="include\objects\table.h" />
     <ClInclude Include="include\objects\lamp.h" />
-    <ClInclude Include="include\objects\testObject.h" />
-    <ClInclude Include="include\objects\b52.h" />
     <ClInclude Include="include\objects\fanStore.h" />
     <ClInclude Include="include\objects\keyboard.h" />
     <ClInclude Include="include\objects\mouse.h" />
     <ClInclude Include="include\objects\robo.h" />
     <ClInclude Include="include\objects\fan1.h" />
+    <ClInclude Include="include\objects\circularFan.h" />
+    <ClInclude Include="include\objects\portableFan.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\resources\sphere.jpeg" />
