@@ -195,29 +195,29 @@ void display()
 
 	if (enableAxes) drawAxes();
 
-	//drawCeilingFan(vec3(0, 48, 0), vec3(0, 0, 0), vec3(3, 3, 3), true);
+	drawCeilingFan(vec3(0, 48, 0), vec3(0, 0, 0), vec3(3, 3, 3), true);
 
-	//drawFanStore(vec3(0, 0, 0), vec3(0, 0, 0), vec3(1.5, 1.2, 1.5));
+	drawFanStore(vec3(0, 0, 0), vec3(0, 0, 0), vec3(1.5, 1.2, 1.5));
 
-	//drawCabinet(vec3(-41, 11, -17), vec3(0, 90, 0), vec3(25, 20, 30));	
+	drawCabinet(vec3(-41, 11, -17), vec3(0, 90, 0), vec3(25, 20, 30));	
 
-	//drawLamp(vec3(32, 35, 20), vec3(), vec3(5, 5, 5), lamp_light_2);
+	drawLamp(vec3(32, 35, 20), vec3(), vec3(5, 5, 5), lamp_light_2);
 
-	//drawTable(vec3(-42, 7, 16), vec3(0, -90, 0), vec3(32, 20, 20));
+	drawTable(vec3(-42, 7, 16), vec3(0, -90, 0), vec3(32, 20, 20));
 
-	//drawTable(vec3(33, 13, -17), vec3(0, -180, 0), vec3(25, 20, 20));
+	drawTable(vec3(33, 13, -17), vec3(0, -180, 0), vec3(25, 20, 20));
 
-	//drawChair1(vec3(40, 6.5, -25), vec3(0, 0, 0), vec3(8.5, 8, 8.5));
+	drawChair1(vec3(40, 6.5, -25), vec3(0, 0, 0), vec3(8.5, 8, 8.5));
 
-	//drawComputer(vec3(34.5, 17, -15), vec3(0, 90, 0), vec3(10, 10, 10));
+	drawComputer(vec3(34.5, 17, -15), vec3(0, 90, 0), vec3(10, 10, 10));
 
-	//drawKeyboard(vec3(34.5, 13.8, -20), vec3(0, 0, 0), vec3(5, 5, 5));
+	drawKeyboard(vec3(34.5, 13.8, -20), vec3(0, 0, 0), vec3(5, 5, 5));
 
-	//drawMouse(vec3(27.5, 13.8, -20), vec3(0, 0, 0), vec3(5, 5, 5));
+	drawMouse(vec3(27.5, 13.8, -20), vec3(0, 0, 0), vec3(5, 5, 5));
 
 	//drawPortableFan(vec3(-37, 7, 20), vec3(0, 0, 0), vec3(5, 5, 5), false);
 
-	drawFan1(vec3(0, 20, 0), vec3(0, 0, 0), vec3(5, 5, 5), true);
+	//drawFan1(vec3(0, 20, 0), vec3(0, 0, 0), vec3(5, 5, 5), true);
 
 	onGUI();
 
