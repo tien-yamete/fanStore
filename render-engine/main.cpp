@@ -134,11 +134,11 @@ void display()
 	glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
 	glEnable(GL_DEPTH_TEST);
 
-	if (enableAxes) drawAxes();
+	//if (enableAxes) drawAxes();
 	
 	drawFanStore(vec3(0, 0, 0), vec3(0, 0, 0), vec3(1.5, 1.2, 1.5));
 
-	drawCabinet(vec3(-41, 11, -17), vec3(0, 90, 0), vec3(25, 20, 30));	
+	drawCabinet(vec3(-41, 11, -17), vec3(0, 90, 0), vec3(25, 20, 30), true);	
 	
 	drawLamp(vec3(32, 35, 20), vec3(), vec3(5, 5, 5), lamp_light_2);
 	
@@ -157,13 +157,15 @@ void display()
 	// ================DRAW 5 FANS=============================
 	drawCeilingFan(vec3(0, 48, 0), vec3(0, 0, 0), vec3(3, 3, 3), true);
 	
-	drawPortableFan(vec3(-24, 10.5f, -24), vec3(0, -180, 0), vec3(8), false);
+	drawPortableFan(vec3(-24, 10.5f, -24), vec3(0, -180, 0), vec3(8), true);
 	
 	drawFan1(vec3(-1, 3.5f, -24), vec3(0, 90, 0), vec3(2.75f), true);
-	
-	drawCircularFan(vec3(22, 15.5f, -17), vec3(0, -180, 0), vec3(2));
 
-	drawWallFan(vec3(47, 23.5f, -22), vec3(0, -90, 0), vec3(2));
+	drawFan1(vec3(-41, 8.5f, 24), vec3(0, -180, 0), vec3(2.75f), false);
+	
+	drawCircularFan(vec3(22, 15.5f, -17), vec3(0, -180, 0), vec3(2), true);
+
+	drawWallFan(vec3(47, 23.5f, -22), vec3(0, -90, 0), vec3(2), true);
 	
 	//onGUI();
 	
@@ -185,27 +187,26 @@ void timer(int value)
 void input(unsigned char key, int mouseX, int mouseY)
 {
 	cameraMove(key, mouseX, mouseY);
-	circularFanKeyboard(key, mouseX, mouseY);
-	fan1Keyboard(key, mouseX, mouseY);
+	
 	switch (key)
 	{
 	case '1':
-		
+		selectedIndex = 1;
 		break;
 	case '2':
-		
+		selectedIndex = 2;
 		break;
 	case '3':
-	
+		selectedIndex = 3;
 		break;
 	case '4':
-		
+		selectedIndex = 4;
 		break;
 	case '5':
-	
+		selectedIndex = 5;
 		break;
 	case '6':
-		
+		selectedIndex = 6;
 		break;
 	case '7':
 		
@@ -235,15 +236,16 @@ void input(unsigned char key, int mouseX, int mouseY)
 		fan1Keyboard(key, mouseX, mouseY);
 		break;
 	case 3:
-		
+		circularFanKeyboard(key, mouseX, mouseY);
 		break;
 	case 4:
-
-		break;
-	case 5:
 		cabinetKeyboard(key, mouseX, mouseY);
 		break;
+	case 5:
+		day();
+		break;
 	case 6:
+		night();
 		break;
 	default:
 		break;

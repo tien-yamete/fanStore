@@ -57,11 +57,11 @@ void cabinetKeyboard(unsigned char key, int mouseX, int mouseY)
 {
 	switch (key)
 	{
-	case 't':
+	case 'o':
 		cabinetLeft_position.z -= 0.05f;
 		if (cabinetLeft_position.z < 0) cabinetLeft_position.z = 0;
 		break;
-	case 'T':
+	case 'O':
 		cabinetLeft_position.z += 0.05f;
 		if (cabinetLeft_position.z > 0.35) cabinetLeft_position.z = 0.35;
 		break;

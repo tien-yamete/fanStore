@@ -36,10 +36,10 @@ void ceilingFanKeyboard(unsigned char key, int mouseX, int mouseY)
 {
     switch (key)
     {
-    case 'q':
+    case 'm':
         cf_on = true;
         break;
-    case 'e':
+    case 'n':
         cf_on = false;
         break;
     default:
